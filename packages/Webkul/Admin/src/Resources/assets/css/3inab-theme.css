@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --enab-bg: #0A0A0A;
+    --enab-surface: #111111;
+    --enab-surface2: #151515;
+    --enab-text: #F5F5F5;
+    --enab-muted: #A3A3A3;
+    --enab-border: rgba(255, 255, 255, 0.08);
+    --enab-burgundy: #5E1B3C;
+    --enab-burgundy-dark: #4A0E2E;
+    --enab-emerald: #1B4D3E;
+    --enab-emerald-dark: #0F3B2F;
+    --enab-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+    --enab-glow: 0 12px 28px rgba(94, 27, 60, 0.25);
+}
+
+body.enab-admin {
+    background-color: var(--enab-bg);
+    color: var(--enab-text);
+    font-family: 'Tajawal', 'Poppins', 'Inter', sans-serif;
+}
+
+body.enab-admin ::selection {
+    background-color: rgba(94, 27, 60, 0.4);
+}
+
+body.enab-admin .enab-header {
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.7));
+    border-color: var(--enab-border);
+    backdrop-filter: blur(14px);
+}
+
+body.enab-admin .enab-sidebar {
+    background-color: var(--enab-surface);
+    border-color: var(--enab-border);
+    box-shadow: var(--enab-shadow);
+}
+
+body.enab-admin .enab-sidebar a {
+    color: var(--enab-text);
+}
+
+body.enab-admin .enab-sidebar .active > a {
+    background-color: rgba(94, 27, 60, 0.18) !important;
+    border-left: 3px solid var(--enab-burgundy);
+}
+
+html[dir='rtl'] body.enab-admin .enab-sidebar .active > a {
+    border-left: 0;
+    border-right: 3px solid var(--enab-burgundy);
+}
+
+body.enab-admin .enab-sidebar a:hover {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+body.enab-admin .enab-main {
+    background-color: var(--enab-bg);
+}
+
+body.enab-admin .enab-header .icon-menu:hover,
+body.enab-admin .enab-header .icon-search:hover,
+body.enab-admin .enab-header .icon-notification:hover,
+body.enab-admin .enab-header .icon-store:hover {
+    color: var(--enab-burgundy);
+}
+
+body.enab-admin .box-shadow {
+    border: 1px solid var(--enab-border);
+    border-radius: 16px;
+    background-color: var(--enab-surface);
+    box-shadow: var(--enab-shadow);
+}
+
+body.enab-admin .enab-card {
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+body.enab-admin .enab-card-header {
+    background-color: var(--enab-surface2) !important;
+    border-bottom: 1px solid var(--enab-border) !important;
+    letter-spacing: 0.2px;
+}
+
+body.enab-admin .enab-card-row {
+    background-color: transparent;
+}
+
+body.enab-admin .enab-card-row:hover {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+body.enab-admin .enab-table {
+    border-radius: 18px;
+}
+
+body.enab-admin .enab-table .row {
+    border-color: var(--enab-border) !important;
+}
+
+body.enab-admin .enab-toolbar input,
+body.enab-admin .enab-toolbar select {
+    background-color: var(--enab-surface2) !important;
+    border-color: var(--enab-border) !important;
+    color: var(--enab-text) !important;
+}
+
+body.enab-admin .enab-toolbar {
+    border: 1px solid var(--enab-border);
+    border-radius: 16px;
+    padding: 10px 14px;
+    background-color: var(--enab-surface);
+    box-shadow: var(--enab-shadow);
+}
+
+body.enab-admin .enab-form-group {
+    padding: 0;
+}
+
+body.enab-admin .enab-form-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--enab-muted) !important;
+}
+
+body.enab-admin [class^="icon-"],
+body.enab-admin [class*=" icon-"] {
+    color: var(--enab-muted);
+}
+
+body.enab-admin .bg-white,
+body.enab-admin .dark\:bg-gray-900,
+body.enab-admin .dark\:bg-gray-800,
+body.enab-admin .bg-gray-100,
+body.enab-admin .bg-gray-200 {
+    background-color: var(--enab-surface) !important;
+}
+
+body.enab-admin .bg-gray-50,
+body.enab-admin .dark\:bg-gray-950 {
+    background-color: var(--enab-bg) !important;
+}
+
+body.enab-admin .bg-gray-900,
+body.enab-admin .dark\:bg-gray-700 {
+    background-color: var(--enab-surface2) !important;
+}
+
+body.enab-admin .text-gray-900,
+body.enab-admin .text-gray-800,
+body.enab-admin .text-gray-700,
+body.enab-admin .dark\:text-white {
+    color: var(--enab-text) !important;
+}
+
+body.enab-admin .text-gray-600,
+body.enab-admin .text-gray-500,
+body.enab-admin .text-gray-400,
+body.enab-admin .dark\:text-gray-300,
+body.enab-admin .dark\:text-gray-400 {
+    color: var(--enab-muted) !important;
+}
+
+body.enab-admin .border-gray-200,
+body.enab-admin .border-gray-300,
+body.enab-admin .border-gray-100,
+body.enab-admin .dark\:border-gray-800,
+body.enab-admin .dark\:border-gray-700 {
+    border-color: var(--enab-border) !important;
+}
+
+body.enab-admin .text-blue-600,
+body.enab-admin .text-blue-500,
+body.enab-admin .text-blue-400,
+body.enab-admin .dark\:text-darkBlue {
+    color: var(--enab-burgundy) !important;
+}
+
+body.enab-admin .bg-blue-600,
+body.enab-admin .bg-blue-500,
+body.enab-admin .bg-blue-400 {
+    background-color: var(--enab-burgundy) !important;
+}
+
+body.enab-admin .border-blue-600,
+body.enab-admin .border-blue-500,
+body.enab-admin .border-blue-400 {
+    border-color: var(--enab-burgundy) !important;
+}
+
+body.enab-admin .text-green-600,
+body.enab-admin .text-green-500 {
+    color: var(--enab-emerald) !important;
+}
+
+body.enab-admin .bg-green-600,
+body.enab-admin .bg-green-500 {
+    background-color: var(--enab-emerald) !important;
+}
+
+body.enab-admin .border-green-600,
+body.enab-admin .border-green-500 {
+    border-color: var(--enab-emerald) !important;
+}
+
+body.enab-admin .text-red-600,
+body.enab-admin .text-red-500,
+body.enab-admin .text-red-400 {
+    color: var(--enab-burgundy) !important;
+}
+
+body.enab-admin .bg-red-600,
+body.enab-admin .bg-red-500,
+body.enab-admin .bg-red-400 {
+    background-color: var(--enab-burgundy-dark) !important;
+}
+
+body.enab-admin .border-red-600,
+body.enab-admin .border-red-500,
+body.enab-admin .border-red-400 {
+    border-color: var(--enab-burgundy-dark) !important;
+}
+
+body.enab-admin .primary-button {
+    background-color: var(--enab-burgundy) !important;
+    border-color: var(--enab-burgundy-dark) !important;
+    color: var(--enab-text) !important;
+    box-shadow: var(--enab-glow);
+    border-radius: 10px !important;
+}
+
+body.enab-admin .primary-button:hover {
+    background-color: var(--enab-burgundy-dark) !important;
+}
+
+body.enab-admin .secondary-button {
+    background-color: transparent !important;
+    border-color: var(--enab-burgundy) !important;
+    color: var(--enab-text) !important;
+    border-radius: 10px !important;
+}
+
+body.enab-admin .secondary-button:hover {
+    background-color: rgba(94, 27, 60, 0.2) !important;
+}
+
+body.enab-admin .transparent-button {
+    color: var(--enab-muted) !important;
+    border-radius: 10px !important;
+}
+
+body.enab-admin .bg-gray-500 {
+    background-color: rgba(0, 0, 0, 0.72) !important;
+}
+
+body.enab-admin .transparent-button:hover,
+body.enab-admin .transparent-button:focus {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: var(--enab-text) !important;
+}
+
+body.enab-admin input,
+body.enab-admin textarea,
+body.enab-admin select {
+    background-color: var(--enab-surface2) !important;
+    border-color: var(--enab-border) !important;
+    color: var(--enab-text) !important;
+    border-radius: 12px !important;
+}
+
+body.enab-admin input::placeholder,
+body.enab-admin textarea::placeholder {
+    color: var(--enab-muted) !important;
+}
+
+body.enab-admin input:focus,
+body.enab-admin textarea:focus,
+body.enab-admin select:focus {
+    border-color: var(--enab-burgundy) !important;
+    box-shadow: 0 0 0 2px rgba(94, 27, 60, 0.35) !important;
+}
+
+body.enab-admin table {
+    color: var(--enab-text);
+}
+
+body.enab-admin thead {
+    background-color: var(--enab-surface2);
+}
+
+body.enab-admin tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+body.enab-admin .shimmer {
+    background: linear-gradient(
+        to right,
+        #111111 8%,
+        #1c1c1c 18%,
+        #111111 33%
+    );
+    background-size: 1250px 100%;
+}
+
+body.enab-admin .hover\:bg-gray-100:hover,
+body.enab-admin .dark\:hover\:bg-gray-950:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+body.enab-admin .enab-auth {
+    background: radial-gradient(circle at top right, rgba(94, 27, 60, 0.35), transparent 45%),
+        radial-gradient(circle at bottom left, rgba(15, 59, 47, 0.3), transparent 40%),
+        var(--enab-bg);
+}
+
+body.enab-admin .enab-auth-card {
+    border: 1px solid var(--enab-border);
+    border-radius: 20px;
+    box-shadow: var(--enab-shadow);
+    background-color: var(--enab-surface);
+}

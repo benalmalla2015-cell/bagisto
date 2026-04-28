@@ -4,7 +4,7 @@
 </template>
 
 <template v-else>
-    <div class="mt-7 flex items-center justify-between gap-4 max-md:flex-wrap">
+    <div class="enab-card enab-toolbar mt-7 flex items-center justify-between gap-4 max-md:flex-wrap">
         <!-- Left Toolbar -->
         <div class="flex gap-x-1">
             <!-- Mass Actions Panel -->

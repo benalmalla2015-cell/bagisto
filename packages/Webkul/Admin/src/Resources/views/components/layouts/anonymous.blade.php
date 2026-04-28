@@ -46,6 +46,11 @@
         rel="stylesheet"
     />
 
+    <link
+        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    />
+
     @if ($favicon = core()->getConfigData('general.design.admin_logo.favicon'))
         <link
             type="image/x-icon"
@@ -71,7 +76,7 @@
     {!! view_render_event('bagisto.admin.layout.head') !!}
 </head>
 
-<body>
+<body class="enab-admin">
     {!! view_render_event('bagisto.admin.layout.body.before') !!}
 
     <!-- Built With Bagisto -->
