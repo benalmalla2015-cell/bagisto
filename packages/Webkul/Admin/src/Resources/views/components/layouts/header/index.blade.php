@@ -20,12 +20,9 @@
                     alt="{{ config('app.name') }}"
                 />
             @else
-                <img
-                    src="{{ request()->cookie('dark_mode') ? bagisto_asset('images/dark-logo.svg') : bagisto_asset('images/logo.svg') }}"
-                    class="h-8 w-auto sm:h-10"
-                    id="logo-image"
-                    alt="{{ config('app.name') }}"
-                />
+                <div id="logo-image" style="font-family:'Tajawal',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;line-height:1;color:#F5F5F5">
+                    <span>عنب</span><span style="color:#888;font-size:.9rem;font-weight:600;margin-right:3px"> 3INAB</span>
+                </div>
             @endif
         </a>
 

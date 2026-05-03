@@ -14,11 +14,9 @@
                     alt="{{ config('app.name') }}"
                 />
             @else
-                <img
-                    class="w-max" 
-                    src="{{ bagisto_asset('images/logo.svg') }}"
-                    alt="{{ config('app.name') }}"
-                />
+                <div style="font-family:'Tajawal',sans-serif;font-size:1.75rem;font-weight:800;letter-spacing:-0.02em;color:#1a1a1a;line-height:1">
+                    <span style="color:#111">عنب</span><span style="color:#888;font-size:1.1rem;font-weight:600;margin-right:4px"> 3INAB</span>
+                </div>
             @endif
 
             <div class="box-shadow flex min-w-[300px] flex-col rounded-md bg-white dark:bg-gray-900">
