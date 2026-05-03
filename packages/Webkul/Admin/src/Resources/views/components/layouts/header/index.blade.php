@@ -94,12 +94,7 @@
             <!-- Admin Dropdown -->
             <x-slot:content class="!p-0">
                 <div class="flex items-center gap-1.5 border border-b-gray-300 px-4 py-2 dark:border-gray-800 sm:px-5 sm:py-2.5">
-                    <img
-                        src="{{ url('cache/logo/bagisto.png') }}"
-                        class="sm:h-6 sm:w-6"
-                        width="20"
-                        height="20"
-                    />
+                    <span style="font-family:'Tajawal',sans-serif;font-weight:800;font-size:.85rem;color:#888">عنب</span>
 
                     <!-- Version -->
                     <p class="text-xs text-gray-400 sm:text-sm">
@@ -152,12 +147,9 @@
                     alt="{{ config('app.name') }}"
                 />
             @else
-                <img
-                    src="{{ request()->cookie('dark_mode') ? bagisto_asset('images/dark-logo.svg') : bagisto_asset('images/logo.svg') }}"
-                    class="h-8 w-auto sm:h-10"
-                    id="logo-image"
-                    alt="{{ config('app.name') }}"
-                />
+                <div style="font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-0.02em;line-height:1;color:#F5F5F5">
+                    <span>عنب</span><span style="color:#888;font-size:.85rem;font-weight:600;margin-right:3px"> 3INAB</span>
+                </div>
             @endif
         </div>
     </x-slot>

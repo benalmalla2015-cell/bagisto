@@ -282,10 +282,8 @@
                 <!-- Powered By -->
                 <div class="mt-auto">
                     <div class="border-t bg-white py-2 text-center text-xs sm:text-sm dark:border-gray-800 dark:bg-gray-900 dark:text-white">
-                        @lang('admin::app.components.layouts.powered-by.description', [
-                            'bagisto' => '<a class="text-blue-600 hover:underline dark:text-darkBlue" href="https://bagisto.com/en/">Bagisto</a>',
-                            'webkul' => '<a class="text-blue-600 hover:underline dark:text-darkBlue" href="https://webkul.com/">Webkul</a>',
-                        ])
+                        <span style="font-family:'Tajawal',sans-serif;font-weight:700;color:#888">عنب</span>
+                        <span style="color:#555;font-size:.75rem"> 3INAB &copy; {{ date('Y') }}</span>
                     </div>
                 </div>
             </div>
