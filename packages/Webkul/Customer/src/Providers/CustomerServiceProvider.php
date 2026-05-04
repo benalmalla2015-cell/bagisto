@@ -2,9 +2,12 @@
 
 namespace Webkul\Customer\Providers;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Webkul\Customer\Console\Commands\CheckSubscriptionExpiry;
 use Webkul\Customer\Facades\Captcha;
+use Webkul\Customer\Services\SubscriptionService;
 
 class CustomerServiceProvider extends ServiceProvider
 {
@@ -24,5 +27,21 @@ class CustomerServiceProvider extends ServiceProvider
         $this->app['validator']->extend('captcha', function ($attribute, $value, $parameters) {
             return Captcha::getFacadeRoot()->validateResponse($value);
         });
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([CheckSubscriptionExpiry::class]);
+
+            $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
+                $schedule->command('subscriptions:check-expiry')->daily();
+            });
+        }
+    }
+
+    /**
+     * Register application services.
+     */
+    public function register(): void
+    {
+        $this->app->singleton(SubscriptionService::class);
     }
 }

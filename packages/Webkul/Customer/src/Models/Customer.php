@@ -17,6 +17,7 @@ use Webkul\Core\Models\ChannelProxy;
 use Webkul\Core\Models\SubscribersListProxy;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
 use Webkul\Customer\Database\Factories\CustomerFactory;
+use Webkul\Customer\Models\MerchantSubscription;
 use Webkul\Product\Models\ProductReviewProxy;
 use Webkul\Sales\Models\InvoiceProxy;
 use Webkul\Sales\Models\OrderProxy;
@@ -63,6 +64,9 @@ class Customer extends Authenticatable implements CustomerContract
         'status',
         'is_verified',
         'is_suspended',
+        'merchant_status',
+        'subscription_status',
+        'subscription_ends_at',
     ];
 
     /**
@@ -292,6 +296,24 @@ class Customer extends Authenticatable implements CustomerContract
     public function channel()
     {
         return $this->belongsTo(ChannelProxy::modelClass(), 'channel_id');
+    }
+
+    /**
+     * Get the merchant subscriptions.
+     */
+    public function merchantSubscriptions()
+    {
+        return $this->hasMany(MerchantSubscription::class, 'customer_id');
+    }
+
+    /**
+     * Get the active merchant subscription.
+     */
+    public function activeSubscription()
+    {
+        return $this->hasOne(MerchantSubscription::class, 'customer_id')
+            ->where('status', 'active')
+            ->latest();
     }
 
     /**
