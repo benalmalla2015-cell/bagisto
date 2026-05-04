@@ -9,6 +9,7 @@ use Webkul\Shop\Http\Controllers\ProductController;
 use Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController;
 use Webkul\Shop\Http\Controllers\SearchController;
 use Webkul\Shop\Http\Controllers\SubscriptionController;
+use Webkul\Shop\Http\Controllers\SubscriptionRenewalController;
 
 /**
  * CMS pages.
@@ -56,6 +57,16 @@ Route::controller(SubscriptionController::class)->group(function () {
 
     Route::get('subscription/{token}', 'destroy')->name('shop.subscription.destroy');
 });
+
+/**
+ * Merchant subscription renewal.
+ */
+Route::get('subscription/renew', [SubscriptionRenewalController::class, 'show'])
+    ->name('shop.subscription.renew');
+
+Route::post('subscription/renew', [SubscriptionRenewalController::class, 'store'])
+    ->name('shop.subscription.renew.store')
+    ->middleware('customer');
 
 /**
  * Compare products

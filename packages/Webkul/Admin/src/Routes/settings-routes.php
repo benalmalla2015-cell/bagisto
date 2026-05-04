@@ -32,6 +32,8 @@ Route::prefix('settings')->group(function () {
         Route::put('edit/{id}', 'update')->name('admin.settings.channels.update');
 
         Route::delete('edit/{id}', 'destroy')->name('admin.settings.channels.delete');
+
+        Route::get('edit/{id}/qr', 'generateQr')->name('admin.settings.channels.qr.generate');
     });
 
     /**

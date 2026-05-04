@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Category\Models\CategoryProxy;
 use Webkul\Core\Contracts\Channel as ChannelContract;
@@ -35,6 +36,7 @@ class Channel extends TranslatableModel implements ChannelContract
         'is_maintenance_on',
         'maintenance_mode_text',
         'allowed_ips',
+        'qr_code_path',
     ];
 
     /**
@@ -144,6 +146,22 @@ class Channel extends TranslatableModel implements ChannelContract
     public function getFaviconUrlAttribute()
     {
         return $this->favicon_url();
+    }
+
+    /**
+     * Get the channel social links.
+     */
+    public function socialLinks(): HasMany
+    {
+        return $this->hasMany(ChannelSocialLink::class);
+    }
+
+    /**
+     * Get the channel payment accounts.
+     */
+    public function paymentAccounts(): HasMany
+    {
+        return $this->hasMany(ChannelPaymentAccount::class)->where('is_active', true);
     }
 
     /**

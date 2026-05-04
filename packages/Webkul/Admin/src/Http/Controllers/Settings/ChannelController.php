@@ -5,9 +5,13 @@ namespace Webkul\Admin\Http\Controllers\Settings;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Webkul\Admin\DataGrids\Settings\ChannelDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Models\ChannelPaymentAccount;
+use Webkul\Core\Models\ChannelSocialLink;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Core\Rules\Code;
 
@@ -173,9 +177,73 @@ class ChannelController extends Controller
             session()->put('currency', $channel->base_currency->code);
         }
 
+        $this->saveSocialLinks($channel->id);
+        $this->savePaymentAccount($channel->id);
+
         session()->flash('success', trans('admin::app.settings.channels.edit.update-success'));
 
         return redirect()->route('admin.settings.channels.index');
+    }
+
+    /**
+     * Generate QR code for a channel.
+     */
+    public function generateQr(int $id): Response
+    {
+        $channel = $this->channelRepository->findOrFail($id);
+
+        $url = $channel->hostname
+            ? 'https://'.$channel->hostname
+            : config('app.url');
+
+        $path = 'qrcodes/channel_'.$id.'.png';
+
+        Storage::put($path, QrCode::format('png')->size(300)->generate($url));
+
+        $channel->update(['qr_code_path' => $path]);
+
+        session()->flash('success', 'تم إنشاء رمز QR بنجاح.');
+
+        return redirect()->route('admin.settings.channels.edit', $id);
+    }
+
+    /**
+     * Save social links for the channel.
+     */
+    protected function saveSocialLinks(int $channelId): void
+    {
+        $socialData = request()->input('social', []);
+
+        foreach ($socialData as $platform => $url) {
+            if (empty($url)) {
+                ChannelSocialLink::where('channel_id', $channelId)
+                    ->where('platform', $platform)
+                    ->delete();
+                continue;
+            }
+
+            ChannelSocialLink::updateOrCreate(
+                ['channel_id' => $channelId, 'platform' => $platform],
+                ['url' => $url]
+            );
+        }
+    }
+
+    /**
+     * Save payment account for the channel.
+     */
+    protected function savePaymentAccount(int $channelId): void
+    {
+        $data = request()->input('payment_account', []);
+
+        if (empty(array_filter($data))) {
+            return;
+        }
+
+        ChannelPaymentAccount::updateOrCreate(
+            ['channel_id' => $channelId],
+            array_merge($data, ['is_active' => true])
+        );
     }
 
     /**

@@ -387,6 +387,29 @@ return [
     ],
 
     /**
+     * Subscriptions.
+     */
+    [
+        'key'  => 'subscriptions',
+        'name' => 'الاشتراكات',
+        'route' => 'admin.subscription.merchants.index',
+        'sort' => 10,
+        'icon' => 'icon-sales',
+    ], [
+        'key'  => 'subscriptions.merchants',
+        'name' => 'التجار',
+        'route' => 'admin.subscription.merchants.index',
+        'sort' => 1,
+        'icon' => '',
+    ], [
+        'key'  => 'subscriptions.plans',
+        'name' => 'الباقات',
+        'route' => 'admin.subscription.plans.index',
+        'sort' => 2,
+        'icon' => '',
+    ],
+
+    /**
      * Configuration.
      */
     [

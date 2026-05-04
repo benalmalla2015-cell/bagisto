@@ -284,6 +284,101 @@
 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.design.after', ['channel' => $channel]) !!}
 
+                <!-- ══ QR Code Section ══ -->
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <div class="mb-4 flex items-center gap-2">
+                        <p class="text-base font-semibold text-gray-800 dark:text-white">رمز QR للمتجر</p>
+                        <x-admin::help-tooltip text="رمز QR يتيح للعملاء الوصول السريع لمتجرك عبر مسح الرمز بالكاميرا." />
+                    </div>
+
+                    @if ($channel->qr_code_path && Storage::exists($channel->qr_code_path))
+                        <div class="mb-4">
+                            <img src="{{ Storage::url($channel->qr_code_path) }}" alt="QR Code" class="h-32 w-32 rounded border p-1 dark:border-gray-700" />
+                            <p class="mt-1 text-xs text-gray-500">رمز QR الحالي للمتجر</p>
+                        </div>
+                    @endif
+
+                    <a href="{{ route('admin.settings.channels.qr.generate', $channel) }}"
+                        class="inline-flex items-center gap-2 rounded-md border border-blue-600 px-4 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950">
+                        <span>⟳</span> إنشاء / تحديث رمز QR
+                    </a>
+                </div>
+
+                <!-- ══ Social Media Links ══ -->
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <div class="mb-4 flex items-center gap-2">
+                        <p class="text-base font-semibold text-gray-800 dark:text-white">روابط التواصل الاجتماعي</p>
+                        <x-admin::help-tooltip text="أضف روابط حساباتك على منصات التواصل الاجتماعي. ستظهر في تذييل المتجر." />
+                    </div>
+
+                    @php
+                        $socialLinks = $channel->socialLinks->keyBy('platform');
+                        $platforms = [
+                            'whatsapp'  => ['label' => 'واتساب',   'icon' => '📱', 'placeholder' => 'https://wa.me/966xxxxxxxxx'],
+                            'facebook'  => ['label' => 'فيسبوك',   'icon' => '📘', 'placeholder' => 'https://facebook.com/yourpage'],
+                            'instagram' => ['label' => 'إنستغرام', 'icon' => '📸', 'placeholder' => 'https://instagram.com/yourprofile'],
+                            'tiktok'    => ['label' => 'تيك توك',  'icon' => '🎵', 'placeholder' => 'https://tiktok.com/@yourprofile'],
+                            'twitter'   => ['label' => 'تويتر/X',  'icon' => '🐦', 'placeholder' => 'https://twitter.com/yourprofile'],
+                        ];
+                    @endphp
+
+                    <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+                        @foreach ($platforms as $key => $info)
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>{{ $info['icon'] }} {{ $info['label'] }}</x-admin::form.control-group.label>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="social[{{ $key }}]"
+                                    :value="$socialLinks[$key]->url ?? ''"
+                                    :placeholder="$info['placeholder']"
+                                />
+                            </x-admin::form.control-group>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- ══ Bank / Payment Account ══ -->
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <div class="mb-4 flex items-center gap-2">
+                        <p class="text-base font-semibold text-gray-800 dark:text-white">بيانات الحساب البنكي / الصرافة</p>
+                        <x-admin::help-tooltip text="بيانات الحساب التي ستعرض للعملاء عند اختيار الدفع بالتحويل البنكي." />
+                    </div>
+
+                    @php $payAccount = $channel->paymentAccounts->first(); @endphp
+
+                    <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label>اسم شركة الصرافة / البنك</x-admin::form.control-group.label>
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="payment_account[company_name]"
+                                :value="$payAccount->company_name ?? ''"
+                                placeholder="مثال: بنك الراجحي"
+                            />
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label>رقم الحساب / الآيبان</x-admin::form.control-group.label>
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="payment_account[account_number]"
+                                :value="$payAccount->account_number ?? ''"
+                                placeholder="SA00 0000 0000 0000"
+                            />
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label>اسم صاحب الحساب</x-admin::form.control-group.label>
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="payment_account[account_holder]"
+                                :value="$payAccount->account_holder ?? ''"
+                                placeholder="الاسم الكامل"
+                            />
+                        </x-admin::form.control-group>
+                    </div>
+                </div>
+
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.seo.before', ['channel' => $channel]) !!}
 
                 <!-- Home Page SEO -->
