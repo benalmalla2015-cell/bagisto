@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->string('transfer_number')->nullable()->after('payment_title');
+            $table->string('transfer_number')->nullable();
         });
     }
 
