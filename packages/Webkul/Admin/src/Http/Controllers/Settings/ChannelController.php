@@ -230,20 +230,56 @@ class ChannelController extends Controller
     }
 
     /**
-     * Save payment account for the channel.
+     * Save multiple payment accounts for the channel.
      */
     protected function savePaymentAccount(int $channelId): void
     {
-        $data = request()->input('payment_account', []);
+        $accounts = request()->input('payment_accounts', []);
+        $deletedIds = request()->input('deleted_payment_account_ids', []);
+        $logos = request()->file('payment_accounts', []);
 
-        if (empty(array_filter($data))) {
-            return;
+        if (! empty($deletedIds)) {
+            ChannelPaymentAccount::whereIn('id', $deletedIds)
+                ->where('channel_id', $channelId)
+                ->each(function ($acc) {
+                    if ($acc->logo_path) {
+                        Storage::delete($acc->logo_path);
+                    }
+                    $acc->delete();
+                });
         }
 
-        ChannelPaymentAccount::updateOrCreate(
-            ['channel_id' => $channelId],
-            array_merge($data, ['is_active' => true])
-        );
+        foreach ($accounts as $index => $data) {
+            if (empty(array_filter(\Illuminate\Support\Arr::only($data, ['company_name', 'account_number', 'account_holder'])))) {
+                continue;
+            }
+
+            $logoPath = null;
+            if (isset($logos[$index]['logo']) && $logos[$index]['logo']->isValid()) {
+                $logoPath = $logos[$index]['logo']->store('payment-logos', 'public');
+            }
+
+            $payload = [
+                'channel_id'     => $channelId,
+                'company_name'   => $data['company_name'] ?? '',
+                'account_number' => $data['account_number'] ?? '',
+                'account_holder' => $data['account_holder'] ?? '',
+                'is_active'      => isset($data['is_active']),
+                'sort_order'     => $data['sort_order'] ?? $index,
+            ];
+
+            if ($logoPath) {
+                $payload['logo_path'] = $logoPath;
+            }
+
+            if (! empty($data['id'])) {
+                ChannelPaymentAccount::where('id', $data['id'])
+                    ->where('channel_id', $channelId)
+                    ->update($payload);
+            } else {
+                ChannelPaymentAccount::create($payload);
+            }
+        }
     }
 
     /**

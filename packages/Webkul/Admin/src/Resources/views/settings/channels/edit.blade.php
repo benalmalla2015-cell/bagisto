@@ -337,47 +337,168 @@
                     </div>
                 </div>
 
-                <!-- ══ Bank / Payment Account ══ -->
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
-                    <div class="mb-4 flex items-center gap-2">
-                        <p class="text-base font-semibold text-gray-800 dark:text-white">بيانات الحساب البنكي / الصرافة</p>
-                        <x-admin::help-tooltip text="بيانات الحساب التي ستعرض للعملاء عند اختيار الدفع بالتحويل البنكي." />
+                <!-- ══ Bank / Payment Accounts (Multi) ══ -->
+                <div
+                    class="box-shadow rounded bg-white p-4 dark:bg-gray-900"
+                    x-data="paymentAccountsManager()"
+                    x-init="init()"
+                >
+                    <div class="mb-4 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <p class="text-base font-semibold text-gray-800 dark:text-white">الحسابات البنكية / الصرافة</p>
+                            <x-admin::help-tooltip text="أضف حسابات تحويل بنكي متعددة. ستعرض للعميل عند اختيار الدفع بالتحويل." />
+                        </div>
+                        <button
+                            type="button"
+                            class="flex items-center gap-1 rounded-md border border-blue-600 px-3 py-1.5 text-sm font-medium text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950"
+                            @click="addAccount()"
+                        >
+                            <span class="text-base">+</span> إضافة حساب
+                        </button>
                     </div>
 
-                    @php $payAccount = $channel->paymentAccounts->first(); @endphp
+                    <div class="space-y-4">
+                        <template x-for="(acc, index) in accounts" :key="acc.key">
+                            <div class="rounded-lg border border-gray-200 p-4 dark:border-gray-700">
+                                <!-- Hidden ID -->
+                                <input type="hidden" :name="`payment_accounts[${index}][id]`" :value="acc.id" />
 
-                    <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label>اسم شركة الصرافة / البنك</x-admin::form.control-group.label>
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="payment_account[company_name]"
-                                :value="$payAccount->company_name ?? ''"
-                                placeholder="مثال: بنك الراجحي"
-                            />
-                        </x-admin::form.control-group>
+                                <div class="mb-3 flex items-center justify-between">
+                                    <span class="text-sm font-semibold text-gray-600 dark:text-gray-400" x-text="`حساب ${index + 1}`"></span>
+                                    <div class="flex items-center gap-3">
+                                        <!-- Active Toggle -->
+                                        <label class="flex cursor-pointer items-center gap-1.5 text-xs text-gray-500">
+                                            <input
+                                                type="checkbox"
+                                                :name="`payment_accounts[${index}][is_active]`"
+                                                value="1"
+                                                x-model="acc.is_active"
+                                                class="rounded"
+                                            />
+                                            مفعّل
+                                        </label>
+                                        <!-- Delete -->
+                                        <button
+                                            type="button"
+                                            class="text-red-500 hover:text-red-700 text-sm"
+                                            @click="removeAccount(index, acc.id)"
+                                        >
+                                            ✕ حذف
+                                        </button>
+                                    </div>
+                                </div>
 
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label>رقم الحساب / الآيبان</x-admin::form.control-group.label>
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="payment_account[account_number]"
-                                :value="$payAccount->account_number ?? ''"
-                                placeholder="SA00 0000 0000 0000"
-                            />
-                        </x-admin::form.control-group>
+                                <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+                                    <!-- Company Name -->
+                                    <div>
+                                        <label class="mb-1 block text-xs font-medium text-gray-700 dark:text-gray-300">اسم البنك / الصرافة *</label>
+                                        <input
+                                            type="text"
+                                            :name="`payment_accounts[${index}][company_name]`"
+                                            x-model="acc.company_name"
+                                            placeholder="مثال: بنك الراجحي"
+                                            class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                                        />
+                                    </div>
 
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label>اسم صاحب الحساب</x-admin::form.control-group.label>
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="payment_account[account_holder]"
-                                :value="$payAccount->account_holder ?? ''"
-                                placeholder="الاسم الكامل"
-                            />
-                        </x-admin::form.control-group>
+                                    <!-- Account Holder -->
+                                    <div>
+                                        <label class="mb-1 block text-xs font-medium text-gray-700 dark:text-gray-300">اسم صاحب الحساب *</label>
+                                        <input
+                                            type="text"
+                                            :name="`payment_accounts[${index}][account_holder]`"
+                                            x-model="acc.account_holder"
+                                            placeholder="الاسم الكامل"
+                                            class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                                        />
+                                    </div>
+
+                                    <!-- Account Number -->
+                                    <div>
+                                        <label class="mb-1 block text-xs font-medium text-gray-700 dark:text-gray-300">رقم الحساب / الآيبان *</label>
+                                        <input
+                                            type="text"
+                                            :name="`payment_accounts[${index}][account_number]`"
+                                            x-model="acc.account_number"
+                                            placeholder="SA00 0000 0000 0000"
+                                            class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-mono dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                                        />
+                                    </div>
+
+                                    <!-- Logo Upload -->
+                                    <div>
+                                        <label class="mb-1 block text-xs font-medium text-gray-700 dark:text-gray-300">شعار البنك / الصرافة</label>
+                                        <div class="flex items-center gap-3">
+                                            <template x-if="acc.logo_url">
+                                                <img :src="acc.logo_url" class="h-10 w-10 rounded border object-contain p-0.5 dark:border-gray-600" />
+                                            </template>
+                                            <input
+                                                type="file"
+                                                :name="`payment_accounts[${index}][logo]`"
+                                                accept="image/*"
+                                                class="block w-full text-xs text-gray-500 file:mr-2 file:cursor-pointer file:rounded file:border-0 file:bg-blue-50 file:px-3 file:py-1 file:text-xs file:font-medium file:text-blue-700 dark:file:bg-blue-950 dark:file:text-blue-300"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sort Order (hidden) -->
+                                <input type="hidden" :name="`payment_accounts[${index}][sort_order]`" :value="index" />
+                            </div>
+                        </template>
+
+                        <div x-show="accounts.length === 0" class="rounded-lg border border-dashed border-gray-300 py-8 text-center text-sm text-gray-400 dark:border-gray-600">
+                            لا توجد حسابات. اضغط "إضافة حساب" لإضافة أول حساب.
+                        </div>
+
+                        <!-- Deleted IDs -->
+                        <template x-for="id in deletedIds" :key="id">
+                            <input type="hidden" name="deleted_payment_account_ids[]" :value="id" />
+                        </template>
                     </div>
                 </div>
+
+                @push('scripts')
+                <script>
+                    function paymentAccountsManager() {
+                        return {
+                            accounts: [],
+                            deletedIds: [],
+                            keyCounter: 0,
+
+                            init() {
+                                const existing = @json($channel->paymentAccounts->sortBy('sort_order')->values());
+                                this.accounts = existing.map(a => ({
+                                    key: ++this.keyCounter,
+                                    id: a.id,
+                                    company_name: a.company_name,
+                                    account_number: a.account_number,
+                                    account_holder: a.account_holder,
+                                    is_active: a.is_active,
+                                    logo_url: a.logo_path ? '{{ asset('storage') }}/' + a.logo_path : null,
+                                }));
+                            },
+
+                            addAccount() {
+                                this.accounts.push({
+                                    key: ++this.keyCounter,
+                                    id: '',
+                                    company_name: '',
+                                    account_number: '',
+                                    account_holder: '',
+                                    is_active: true,
+                                    logo_url: null,
+                                });
+                            },
+
+                            removeAccount(index, id) {
+                                if (id) this.deletedIds.push(id);
+                                this.accounts.splice(index, 1);
+                            },
+                        };
+                    }
+                </script>
+                @endpush
 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.seo.before', ['channel' => $channel]) !!}
 

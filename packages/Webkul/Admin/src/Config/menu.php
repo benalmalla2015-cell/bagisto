@@ -387,26 +387,15 @@ return [
     ],
 
     /**
-     * Subscriptions.
+     * My Subscription (merchant-facing).
+     * SaaS admin pages (plans/merchants management) are reserved for future phase.
      */
     [
-        'key'  => 'subscriptions',
-        'name' => 'الاشتراكات',
-        'route' => 'admin.subscription.merchants.index',
+        'key'  => 'my-subscription',
+        'name' => 'اشتراكي',
+        'route' => 'admin.my-subscription.index',
         'sort' => 10,
         'icon' => 'icon-sales',
-    ], [
-        'key'  => 'subscriptions.merchants',
-        'name' => 'التجار',
-        'route' => 'admin.subscription.merchants.index',
-        'sort' => 1,
-        'icon' => '',
-    ], [
-        'key'  => 'subscriptions.plans',
-        'name' => 'الباقات',
-        'route' => 'admin.subscription.plans.index',
-        'sort' => 2,
-        'icon' => '',
     ],
 
     /**

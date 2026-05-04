@@ -96,11 +96,8 @@
             </div>
 
             <!-- Powered By -->
-            <div class="text-sm font-normal">
-                @lang('admin::app.users.sessions.powered-by-description', [
-                    'bagisto' => '<a class="text-blue-600 hover:underline" href="https://bagisto.com/en/">Bagisto</a>',
-                    'webkul' => '<a class="text-blue-600 hover:underline" href="https://webkul.com/">Webkul</a>',
-                ])
+            <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                مدعوم من <span style="font-family:'Tajawal',sans-serif;font-weight:700;color:#6d28d9">عنب 3INAB</span>
             </div>
         </div>
     </div>

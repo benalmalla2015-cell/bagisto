@@ -1,9 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Admin\Http\Controllers\MySubscriptionController;
 use Webkul\Admin\Http\Controllers\Subscription\MerchantSubscriptionController;
 use Webkul\Admin\Http\Controllers\Subscription\PlanController;
 
+// @merchant-view: Merchant's own subscription page
+Route::get('my-subscription', [MySubscriptionController::class, 'index'])->name('admin.my-subscription.index');
+
+// @saas-admin-only — Routes below are reserved for the future SaaS Admin panel.
+// They are kept in codebase but will be protected by 'saas-admin' middleware in a future phase.
 Route::prefix('subscriptions')->group(function () {
     Route::get('plans', [PlanController::class, 'index'])->name('admin.subscription.plans.index');
     Route::get('plans/create', [PlanController::class, 'create'])->name('admin.subscription.plans.create');
