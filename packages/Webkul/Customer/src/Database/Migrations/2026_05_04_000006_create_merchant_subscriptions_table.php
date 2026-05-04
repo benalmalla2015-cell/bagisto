@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('merchant_subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id');
+            $table->unsignedInteger('customer_id');
             $table->unsignedBigInteger('plan_id')->nullable();
             $table->date('start_date');
             $table->date('end_date');

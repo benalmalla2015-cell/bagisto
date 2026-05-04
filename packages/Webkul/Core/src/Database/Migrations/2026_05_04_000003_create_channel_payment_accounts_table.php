@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('channel_payment_accounts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('channel_id');
+            $table->unsignedInteger('channel_id');
             $table->string('company_name');
             $table->string('account_number');
             $table->string('account_holder');

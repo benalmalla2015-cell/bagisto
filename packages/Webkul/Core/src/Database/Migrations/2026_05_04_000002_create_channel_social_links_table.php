@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('channel_social_links', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('channel_id');
+            $table->unsignedInteger('channel_id');
             $table->enum('platform', ['whatsapp', 'facebook', 'instagram', 'tiktok', 'twitter']);
             $table->string('url');
             $table->timestamps();
