@@ -107,6 +107,42 @@
                 </x-shop::accordion>
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.payment_method.accordion.after') !!}
+
+                <!-- Transfer Number Field -->
+                <div
+                    v-if="selectedMethod && selectedMethod.method === 'moneytransfer'"
+                    class="mt-5 rounded-xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-800 dark:bg-amber-950"
+                >
+                    @php
+                        $accounts = \Webkul\Core\Models\ChannelPaymentAccount::where('is_active', true)->get();
+                    @endphp
+
+                    @if ($accounts->isNotEmpty())
+                        <div class="mb-4 text-sm text-amber-800 dark:text-amber-200">
+                            <p class="mb-2 font-semibold">بيانات التحويل البنكي:</p>
+                            @foreach ($accounts as $acc)
+                                <div class="mb-1">
+                                    <strong>{{ $acc->company_name }}</strong> —
+                                    رقم الحساب: <span class="font-mono">{{ $acc->account_number }}</span> —
+                                    لصالح: {{ $acc->account_holder }}
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    <label class="mb-1.5 block text-sm font-semibold text-amber-900 dark:text-amber-100">
+                        رقم الحوالة / الإيصال <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        v-model="$parent.transferNumber"
+                        placeholder="أدخل رقم الحوالة البنكية أو الصرافة"
+                        class="w-full rounded-lg border border-amber-300 bg-white px-4 py-2.5 text-sm focus:border-amber-500 focus:outline-none dark:border-amber-700 dark:bg-gray-900 dark:text-white"
+                    />
+                    <p class="mt-1 text-xs text-amber-600 dark:text-amber-400">
+                        ستظهر هذه المعلومة في تفاصيل الطلب للتاجر
+                    </p>
+                </div>
             </template>
         </div>
     </script>
@@ -125,8 +161,15 @@
 
             emits: ['processing', 'processed'],
 
+            data() {
+                return {
+                    selectedMethod: null,
+                };
+            },
+
             methods: {
                 store(selectedMethod) {
+                    this.selectedMethod = selectedMethod;
                     this.$emit('processing', 'review');
 
                     this.$axios.post("{{ route('shop.checkout.onepage.payment_methods.store') }}", {

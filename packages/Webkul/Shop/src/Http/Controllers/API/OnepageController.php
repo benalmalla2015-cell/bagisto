@@ -175,6 +175,10 @@ class OnepageController extends APIController
 
         $data = (new OrderResource($cart))->jsonSerialize();
 
+        if (request('transfer_number')) {
+            $data['transfer_number'] = request('transfer_number');
+        }
+
         try {
             $order = $this->orderRepository->create($data);
         } catch (CouponUsageLimitExceededException $e) {

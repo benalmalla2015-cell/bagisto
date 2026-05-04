@@ -188,7 +188,7 @@ class ChannelController extends Controller
     /**
      * Generate QR code for a channel.
      */
-    public function generateQr(int $id): Response
+    public function generateQr(int $id): \Illuminate\Http\RedirectResponse
     {
         $channel = $this->channelRepository->findOrFail($id);
 

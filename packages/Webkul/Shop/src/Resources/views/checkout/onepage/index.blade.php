@@ -159,6 +159,10 @@
                         paymentMethods: null,
 
                         canPlaceOrder: false,
+
+                        transferNumber: '',
+
+                        selectedPaymentMethod: '',
                     }
                 },
 
@@ -200,6 +204,9 @@
                             this.shippingMethods = data;
                         } else if (this.currentStep == 'payment') {
                             this.paymentMethods = data;
+                            if (data && data.payment && data.payment.method) {
+                                this.selectedPaymentMethod = data.payment.method;
+                            }
                         }
 
                         this.getCart();
@@ -221,7 +228,9 @@
                     placeOrder() {
                         this.isPlacingOrder = true;
 
-                        this.$axios.post('{{ route('shop.checkout.onepage.orders.store') }}')
+                        this.$axios.post('{{ route('shop.checkout.onepage.orders.store') }}', {
+                            transfer_number: this.transferNumber,
+                        })
                             .then(response => {
                                 if (response.data.data.redirect) {
                                     window.location.href = response.data.data.redirect_url;
