@@ -163,6 +163,12 @@ return [
         'route' => 'admin.customers.gdpr.index',
         'sort' => 4,
         'icon' => '',
+    ], [
+        'key' => 'customers.merchants',
+        'name' => 'إدارة التجار',
+        'route' => 'admin.merchants.index',
+        'sort' => 5,
+        'icon' => '',
     ],
 
     /**

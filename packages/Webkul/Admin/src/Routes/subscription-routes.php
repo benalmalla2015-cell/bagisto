@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Admin\Http\Controllers\Merchant\MerchantLinksController;
 use Webkul\Admin\Http\Controllers\MySubscriptionController;
 use Webkul\Admin\Http\Controllers\Subscription\MerchantSubscriptionController;
 use Webkul\Admin\Http\Controllers\Subscription\PlanController;
@@ -22,4 +23,14 @@ Route::prefix('subscriptions')->group(function () {
     Route::post('merchants/{customer}/activate', [MerchantSubscriptionController::class, 'activate'])->name('admin.subscription.merchants.activate');
     Route::post('merchants/{customer}/complimentary', [MerchantSubscriptionController::class, 'grantComplimentary'])->name('admin.subscription.merchants.complimentary');
     Route::post('merchants/{customer}/suspend', [MerchantSubscriptionController::class, 'suspend'])->name('admin.subscription.merchants.suspend');
+});
+
+/**
+ * Merchant social links & QR management.
+ */
+Route::prefix('merchants')->controller(MerchantLinksController::class)->group(function () {
+    Route::get('', 'index')->name('admin.merchants.index');
+    Route::get('{customer}/edit', 'edit')->name('admin.merchants.edit');
+    Route::put('{customer}', 'update')->name('admin.merchants.update');
+    Route::post('{customer}/regenerate-slug', 'regenerateSlug')->name('admin.merchants.regenerate-slug');
 });
