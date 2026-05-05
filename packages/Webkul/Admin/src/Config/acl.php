@@ -945,6 +945,21 @@ return [
         'name' => 'admin::app.acl.import',
         'route' => 'admin.settings.data_transfer.imports.import',
         'sort' => 4,
+    ], [
+        'key' => 'settings.merchants',
+        'name' => 'إدارة التجار',
+        'route' => 'admin.merchants.index',
+        'sort' => 11,
+    ], [
+        'key' => 'settings.merchants.edit',
+        'name' => 'admin::app.acl.edit',
+        'route' => 'admin.merchants.edit',
+        'sort' => 1,
+    ], [
+        'key' => 'settings.merchants.update',
+        'name' => 'admin::app.acl.edit',
+        'route' => 'admin.merchants.update',
+        'sort' => 2,
     ],
 
     /*
