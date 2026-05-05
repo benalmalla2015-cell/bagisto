@@ -1,14 +1,20 @@
 <x-admin::layouts>
-    <x-slot:title>تعديل روابط التاجر: {{ $customer->name }}</x-slot>
+    <x-slot:title>تعديل روابط التاجر</x-slot>
 
     {{-- Header --}}
-    <div class="mb-5 flex items-center gap-3">
-        <a href="{{ route('admin.merchants.index') }}" class="text-gray-400 hover:text-gray-700">
-            <span class="icon-arrow-right text-xl rtl:rotate-180"></span>
-        </a>
-        <p class="text-xl font-bold text-gray-800 dark:text-white">
-            تعديل روابط التاجر: {{ $customer->name }}
-        </p>
+    <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <a
+                href="{{ route('admin.merchants.index') }}"
+                class="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-900"
+            >
+                <span class="icon-arrow-right text-lg rtl:rotate-180"></span>
+            </a>
+            <div>
+                <p class="text-xl font-bold text-gray-800 dark:text-white">{{ $customer->name }}</p>
+                <p class="text-xs text-gray-400">{{ $customer->email }}</p>
+            </div>
+        </div>
     </div>
 
     @if (session('success'))

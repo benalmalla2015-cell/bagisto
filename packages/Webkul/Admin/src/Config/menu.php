@@ -163,12 +163,6 @@ return [
         'route' => 'admin.customers.gdpr.index',
         'sort' => 4,
         'icon' => '',
-    ], [
-        'key' => 'customers.merchants',
-        'name' => 'إدارة التجار',
-        'route' => 'admin.merchants.index',
-        'sort' => 5,
-        'icon' => '',
     ],
 
     /**
@@ -413,6 +407,12 @@ return [
         'route' => 'admin.payment-accounts.index',
         'sort'  => 6,
         'icon'  => '',
+    ], [
+        'key' => 'settings.merchants',
+        'name' => 'إدارة التجار',
+        'route' => 'admin.merchants.index',
+        'sort' => 11,
+        'icon' => '',
     ],
 
     /**
