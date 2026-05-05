@@ -17,6 +17,7 @@ use Webkul\Core\Models\ChannelProxy;
 use Webkul\Core\Models\SubscribersListProxy;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
 use Webkul\Customer\Database\Factories\CustomerFactory;
+use Webkul\Customer\Models\MerchantSocialLink;
 use Webkul\Customer\Models\MerchantSubscription;
 use Webkul\Product\Models\ProductReviewProxy;
 use Webkul\Sales\Models\InvoiceProxy;
@@ -67,6 +68,7 @@ class Customer extends Authenticatable implements CustomerContract
         'merchant_status',
         'subscription_status',
         'subscription_ends_at',
+        'merchant_slug',
     ];
 
     /**
@@ -314,6 +316,14 @@ class Customer extends Authenticatable implements CustomerContract
         return $this->hasOne(MerchantSubscription::class, 'customer_id')
             ->where('status', 'active')
             ->latest();
+    }
+
+    /**
+     * Get the merchant social links.
+     */
+    public function socialLinks()
+    {
+        return $this->hasOne(MerchantSocialLink::class, 'customer_id');
     }
 
     /**

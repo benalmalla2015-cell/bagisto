@@ -1238,6 +1238,30 @@ return [
         'wishlist' => '愿望清单',
     ],
 
+
+    'merchant' => [
+        'social-links' => [
+            'title'     => 'Social Links',
+            'whatsapp'  => 'WhatsApp',
+            'facebook'  => 'Facebook',
+            'instagram' => 'Instagram',
+            'tiktok'    => 'TikTok',
+            'twitter'   => 'Twitter / X',
+            'save'      => 'Save Links',
+            'success'   => 'Social links saved successfully.',
+        ],
+
+        'qr' => [
+            'title'              => 'My Store QR Code',
+            'description'        => 'Share this QR code with your customers so they can access your store directly.',
+            'store-link'         => 'Store Link',
+            'download'           => 'Download QR',
+            'regenerate'         => 'Regenerate QR',
+            'regenerated'        => 'QR code regenerated successfully.',
+            'confirm-regenerate' => 'Are you sure you want to regenerate the QR code?',
+        ],
+    ],
+
     'subscription' => [
         'already' => '您已经订阅了我们的新闻通讯。',
         'subscribe-success' => '您已成功订阅我们的新闻通讯。',

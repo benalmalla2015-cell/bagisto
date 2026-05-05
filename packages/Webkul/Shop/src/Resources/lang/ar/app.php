@@ -1695,5 +1695,28 @@ return [
             'send-message' => 'تم إرسال :name بنجاح.',
             'update-success' => 'تم تحديث :name بنجاح.',
         ],
+
+        'merchant' => [
+            'social-links' => [
+                'title'     => 'روابط التواصل الاجتماعي',
+                'whatsapp'  => 'واتساب',
+                'facebook'  => 'فيسبوك',
+                'instagram' => 'إنستغرام',
+                'tiktok'    => 'تيك توك',
+                'twitter'   => 'تويتر / X',
+                'save'      => 'حفظ الروابط',
+                'success'   => 'تم حفظ روابط التواصل بنجاح.',
+            ],
+
+            'qr' => [
+                'title'              => 'رمز QR الخاص بمتجري',
+                'description'        => 'شارك رمز QR مع عملائك ليتمكنوا من الوصول إلى متجرك مباشرة.',
+                'store-link'         => 'رابط المتجر',
+                'download'           => 'تحميل QR',
+                'regenerate'         => 'إعادة توليد QR',
+                'regenerated'        => 'تم إعادة توليد رمز QR بنجاح.',
+                'confirm-regenerate' => 'هل تريد إعادة توليد رمز QR؟',
+            ],
+        ],
     ],
 ];

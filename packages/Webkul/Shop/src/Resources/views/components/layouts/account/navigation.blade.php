@@ -28,6 +28,35 @@
     </div>
 
     <!-- Account Navigation Menus -->
+    {{-- Merchant section (only for active merchants) --}}
+    @if ($customer && $customer->merchant_status === 'active')
+        <div>
+            <div class="select-none pb-5 max-md:pb-1.5">
+                <p class="text-xl font-medium max-md:text-lg">متجري</p>
+            </div>
+            <div class="grid rounded-md border border-b border-l-[1px] border-r border-t-0 border-zinc-200 max-md:border-none">
+                <a href="{{ route('shop.customers.account.merchant.social-links.edit') }}">
+                    <div class="flex justify-between px-6 py-5 border-t border-zinc-200 hover:bg-zinc-100 cursor-pointer max-md:p-4 max-md:border-0 max-md:py-3 max-md:px-0 {{ request()->routeIs('shop.customers.account.merchant.social-links.*') ? 'bg-zinc-100' : '' }}">
+                        <p class="flex items-center text-lg font-medium gap-x-4 max-sm:text-base">
+                            <span class="icon-star text-2xl"></span>
+                            روابط التواصل
+                        </p>
+                        <span class="text-2xl icon-arrow-right rtl:icon-arrow-left"></span>
+                    </div>
+                </a>
+                <a href="{{ route('shop.customers.account.merchant.qr') }}">
+                    <div class="flex justify-between px-6 py-5 border-t border-zinc-200 hover:bg-zinc-100 cursor-pointer max-md:p-4 max-md:border-0 max-md:py-3 max-md:px-0 {{ request()->routeIs('shop.customers.account.merchant.qr') ? 'bg-zinc-100' : '' }}">
+                        <p class="flex items-center text-lg font-medium gap-x-4 max-sm:text-base">
+                            <span class="icon-download text-2xl"></span>
+                            رمز QR
+                        </p>
+                        <span class="text-2xl icon-arrow-right rtl:icon-arrow-left"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    @endif
+
     @foreach (menu()->getItems('customer') as $menuItem)
         <div>
             <!-- Account Navigation Toggler -->

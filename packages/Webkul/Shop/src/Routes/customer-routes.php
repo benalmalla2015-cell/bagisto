@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Webkul\Core\Http\Middleware\NoCacheMiddleware;
 use Webkul\Shop\Http\Controllers\Customer\Account\AddressController;
+use Webkul\Shop\Http\Controllers\Customer\Merchant\QrCodeController;
+use Webkul\Shop\Http\Controllers\Customer\Merchant\SocialLinksController;
 use Webkul\Shop\Http\Controllers\Customer\Account\DownloadableProductController;
 use Webkul\Shop\Http\Controllers\Customer\Account\OrderController;
 use Webkul\Shop\Http\Controllers\Customer\Account\RMAController;
@@ -167,6 +169,16 @@ Route::prefix('customer')->group(function () {
                 Route::get('', 'index')->name('shop.customers.account.downloadable_products.index');
 
                 Route::get('download/{id}', 'download')->name('shop.customers.account.downloadable_products.download');
+            });
+
+            /**
+             * Merchant Social Links.
+             */
+            Route::middleware([\Webkul\Shop\Http\Middleware\CheckMerchantSubscription::class])->prefix('merchant')->group(function () {
+                Route::get('social-links', [SocialLinksController::class, 'edit'])->name('shop.customers.account.merchant.social-links.edit');
+                Route::put('social-links', [SocialLinksController::class, 'update'])->name('shop.customers.account.merchant.social-links.update');
+                Route::get('qr-code', [QrCodeController::class, 'show'])->name('shop.customers.account.merchant.qr');
+                Route::post('qr-code/regenerate', [QrCodeController::class, 'regenerate'])->name('shop.customers.account.merchant.qr.regenerate');
             });
 
             /**

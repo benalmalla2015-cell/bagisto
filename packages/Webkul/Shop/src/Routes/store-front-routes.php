@@ -9,6 +9,7 @@ use Webkul\Shop\Http\Controllers\ProductController;
 use Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController;
 use Webkul\Shop\Http\Controllers\SearchController;
 use Webkul\Shop\Http\Controllers\SubscriptionController;
+use Webkul\Shop\Http\Controllers\MerchantStoreController;
 use Webkul\Shop\Http\Controllers\SubscriptionRenewalController;
 
 /**
@@ -89,3 +90,9 @@ Route::controller(ProductController::class)->group(function () {
  */
 Route::get('booking-slots/{id}', [BookingProductController::class, 'index'])
     ->name('shop.booking-product.slots.index');
+
+/**
+ * Merchant public store page (scanned via QR code).
+ */
+Route::get('store/{slug}', [MerchantStoreController::class, 'show'])
+    ->name('shop.merchant.store.show');
