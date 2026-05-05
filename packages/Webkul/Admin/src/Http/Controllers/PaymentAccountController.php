@@ -22,7 +22,22 @@ class PaymentAccountController extends Controller
             ->orderBy('id')
             ->get();
 
-        return view('admin::payment-accounts.index', compact('accounts', 'channel'));
+        $accountsData = $accounts->map(function ($a) {
+            return [
+                'id'             => $a->id,
+                'company_name'   => $a->company_name,
+                'account_number' => $a->account_number,
+                'account_holder' => $a->account_holder,
+                'is_active'      => (bool) $a->is_active,
+                'sort_order'     => (int) $a->sort_order,
+                'logo_url'       => $a->logo_url,
+                'has_logo'       => (bool) $a->logo_path,
+                'update_url'     => route('admin.payment-accounts.update', $a->id),
+                'toggle_url'     => route('admin.payment-accounts.toggle', $a->id),
+            ];
+        })->values()->toArray();
+
+        return view('admin::payment-accounts.index', compact('accounts', 'channel', 'accountsData'));
     }
 
     /**

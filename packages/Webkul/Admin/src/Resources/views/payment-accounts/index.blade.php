@@ -190,18 +190,7 @@
 
     {{-- ══ Accounts Data + JS ══ --}}
     <script>
-        var paAccounts = @json($accounts->map(fn($a) => [
-            'id'             => $a->id,
-            'company_name'   => $a->company_name,
-            'account_number' => $a->account_number,
-            'account_holder' => $a->account_holder,
-            'is_active'      => (bool) $a->is_active,
-            'sort_order'     => $a->sort_order,
-            'logo_url'       => $a->logo_url,
-            'has_logo'       => (bool) $a->logo_path,
-            'update_url'     => route('admin.payment-accounts.update', $a->id),
-            'toggle_url'     => route('admin.payment-accounts.toggle', $a->id),
-        ])->values());
+        var paAccounts = {!! json_encode($accountsData, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT) !!};
 
         var paModal = {
             openAdd: function() {
