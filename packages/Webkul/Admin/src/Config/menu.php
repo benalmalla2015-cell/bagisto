@@ -399,6 +399,17 @@ return [
     ],
 
     /**
+     * Bank / Exchange Payment Accounts.
+     */
+    [
+        'key'   => 'settings.payment-accounts',
+        'name'  => 'الحسابات البنكية',
+        'route' => 'admin.payment-accounts.index',
+        'sort'  => 6,
+        'icon'  => '',
+    ],
+
+    /**
      * Configuration.
      */
     [
