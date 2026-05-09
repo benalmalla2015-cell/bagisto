@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --inab-purple:      #5F34A7;
+    --inab-purple-dark: #3D216B;
+    --inab-green:       #4CAF50;
+    --inab-green-dark:  #3D9E42;
+}
+
 @font-face {
     font-family: "bagisto-shop";
     src: url("../fonts/bagisto-shop.woff") format("woff");
@@ -372,7 +381,7 @@ img.lazy {
     }
 
     * {
-        @apply box-border font-poppins;
+        @apply box-border font-tajawal;
     }
 
     .scrollbar-hide::-webkit-scrollbar {
@@ -431,11 +440,11 @@ img.lazy {
     }
 
     .primary-button {
-        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl text-white bg-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:opacity-[0.9];
+        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl text-white bg-inab-purple border border-inab-purple px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-inab-purple-dark;
     }
 
     .secondary-button {
-        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl bg-white text-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-[#050e3a0d];
+        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl bg-white text-inab-purple border border-inab-purple px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-[#5f34a710];
     }
 
     .shimmer {

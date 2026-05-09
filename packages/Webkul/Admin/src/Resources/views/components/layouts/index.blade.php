@@ -131,8 +131,8 @@
         border-radius:8px !important;
     }
     html.dark .enab-sidebar .bg-blue-600 {
-        background:#333 !important;
-        border:1px solid #555 !important;
+        background:rgba(95,52,167,0.35) !important;
+        border:1px solid #5F34A7 !important;
     }
     html.dark .enab-sidebar p { color:#E0E0E0 !important; }
 
@@ -182,17 +182,18 @@
     html.dark .primary-button,
     html.dark button[type="submit"],
     html.dark a.primary-button {
-        background:transparent !important;
-        border:1px solid #555 !important;
+        background:#5F34A7 !important;
+        border:1px solid #3D216B !important;
         color:#F5F5F5 !important;
         border-radius:8px !important;
         transition:background .2s,border-color .2s !important;
+        box-shadow:0 4px 16px rgba(95,52,167,0.35) !important;
     }
     html.dark .primary-button:hover,
     html.dark button[type="submit"]:hover,
     html.dark a.primary-button:hover {
-        background:#333 !important;
-        border-color:#777 !important;
+        background:#3D216B !important;
+        border-color:#5F34A7 !important;
     }
     html.dark .transparent-button,
     html.dark a.transparent-button {

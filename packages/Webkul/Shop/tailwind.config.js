@@ -34,11 +34,19 @@ module.exports = {
                 darkGreen: '#40994A',
                 darkBlue: '#0044F2',
                 darkPink: '#F85156',
+                'inab-purple':      '#5F34A7',
+                'inab-green':       '#4CAF50',
+                'inab-purple-dark': '#3D216B',
+            },
+
+            backgroundImage: {
+                'inab-gradient': 'linear-gradient(135deg, #5F34A7 0%, #3D216B 100%)',
             },
 
             fontFamily: {
                 poppins: ["Poppins", "sans-serif"],
                 dmserif: ["DM Serif Display", "serif"],
+                tajawal: ["Tajawal", "sans-serif"],
             },
         }
     },
