@@ -13,6 +13,8 @@ class MerchantSubscription extends Model
         'start_date',
         'end_date',
         'status',
+        'transfer_number',
+        'receipt_path',
         'is_complimentary',
         'complimentary_note',
     ];

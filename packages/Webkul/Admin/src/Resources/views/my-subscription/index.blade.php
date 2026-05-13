@@ -16,7 +16,7 @@
         @if ($daysLeft !== null && $daysLeft <= 7 && $daysLeft >= 0)
             <div class="mb-4 flex items-center gap-3 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm font-medium text-amber-800 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-200">
                 ⏰ اشتراكك ينتهي خلال <strong>{{ $daysLeft }} {{ $daysLeft == 1 ? 'يوم' : 'أيام' }}</strong> — جدّد الآن
-                <a href="{{ route('shop.subscription.renew') }}" class="ms-auto rounded-md border border-amber-500 px-3 py-1 text-xs hover:bg-amber-100 dark:hover:bg-amber-900">
+                <a href="{{ route('admin.my-subscription.renew') }}" class="ms-auto rounded-md border border-amber-500 px-3 py-1 text-xs hover:bg-amber-100 dark:hover:bg-amber-900">
                     تجديد الاشتراك
                 </a>
             </div>
@@ -101,7 +101,7 @@
                     </p>
                 </div>
                 <a
-                    href="{{ route('shop.subscription.renew') }}"
+                    href="{{ route('admin.my-subscription.renew') }}"
                     class="mt-4 block rounded-lg bg-purple-600 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-purple-700"
                 >
                     تجديد الاشتراك الآن
@@ -115,7 +115,7 @@
             <p class="text-lg font-semibold text-gray-800 dark:text-white mb-2">لا يوجد اشتراك نشط</p>
             <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">اختر إحدى الباقات أدناه للبدء.</p>
             <a
-                href="{{ route('shop.subscription.renew') }}"
+                href="{{ route('admin.my-subscription.renew') }}"
                 class="inline-block rounded-lg bg-purple-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-purple-700"
             >
                 اشترك الآن
@@ -140,7 +140,7 @@
                     <p class="text-xs text-gray-500 mb-3">{{ $plan->duration_days }} يوم — {{ $plan->description }}</p>
                     @if (! $isCurrent)
                         <a
-                            href="{{ route('shop.subscription.renew') }}?plan_id={{ $plan->id }}"
+                            href="{{ route('admin.my-subscription.renew') }}?plan_id={{ $plan->id }}"
                             class="block rounded-lg border border-purple-500 px-3 py-1.5 text-center text-sm font-medium text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-950"
                         >
                             اختر هذه الباقة

@@ -8,6 +8,8 @@ use Webkul\Admin\Http\Controllers\Subscription\PlanController;
 
 // @merchant-view: Merchant's own subscription page
 Route::get('my-subscription', [MySubscriptionController::class, 'index'])->name('admin.my-subscription.index');
+Route::get('my-subscription/renew', [MySubscriptionController::class, 'renew'])->name('admin.my-subscription.renew');
+Route::post('my-subscription/renew', [MySubscriptionController::class, 'renewStore'])->name('admin.my-subscription.renew.store');
 
 // @saas-admin-only — Routes below are reserved for the future SaaS Admin panel.
 // They are kept in codebase but will be protected by 'saas-admin' middleware in a future phase.
