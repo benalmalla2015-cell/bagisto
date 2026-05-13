@@ -30,24 +30,24 @@
         @if ($accounts->isNotEmpty())
             <div class="space-y-4">
                 @foreach ($accounts as $acc)
-                    <div class="rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-950">
-                        <p class="font-bold text-blue-800 dark:text-blue-200 mb-2">{{ $acc->company_name }}</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-blue-700 dark:text-blue-300">
+                    <div class="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
+                        <p class="font-bold text-gray-800 dark:text-white mb-2">{{ $acc->company_name }}</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-600 dark:text-gray-300">
                             <div>
-                                <span class="text-blue-500 dark:text-blue-400">رقم الحساب:</span>
-                                <span class="font-mono font-semibold" dir="ltr">{{ $acc->account_number }}</span>
+                                <span class="text-gray-500 dark:text-gray-400">رقم الحساب:</span>
+                                <span class="font-mono font-semibold text-gray-800 dark:text-white" dir="ltr">{{ $acc->account_number }}</span>
                             </div>
                             <div>
-                                <span class="text-blue-500 dark:text-blue-400">اسم صاحب الحساب:</span>
-                                <span class="font-semibold">{{ $acc->account_holder }}</span>
+                                <span class="text-gray-500 dark:text-gray-400">اسم صاحب الحساب:</span>
+                                <span class="font-semibold text-gray-800 dark:text-white">{{ $acc->account_holder }}</span>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
 
-            <div class="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-3 dark:border-amber-800 dark:bg-amber-950">
-                <p class="text-sm text-amber-700 dark:text-amber-300">
+            <div class="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-3 dark:border-amber-700 dark:bg-amber-900">
+                <p class="text-sm text-amber-700 dark:text-amber-200">
                     ⚠️ بعد إتمام التحويل، أدخل رقم الحوالة أدناه وارفع صورة الإيصال (إن وجد).
                     سيتم تفعيل اشتراكك بعد مراجعة الإدارة.
                 </p>
